@@ -95,7 +95,8 @@
     border-radius:var(--radius-outer);
     box-shadow:var(--shadow-1-hover);
     padding:8px;
-    min-width:200px;
+    min-width:260px;
+    max-width:300px;
     opacity:0;
     visibility:hidden;
     transform:translateY(-6px) scale(0.98);
@@ -122,6 +123,43 @@
   }
   .directions-pop a:hover{background:var(--blue-soft); transform:translateX(2px);}
   .directions-pop .icon{font-size:16px;}
+
+  .directions-pop-toggle{
+    display:flex;
+    width:100%;
+    align-items:center;
+    gap:9px;
+    padding:10px 12px;
+    border-radius:var(--radius-inner);
+    color:var(--ink);
+    background:transparent;
+    border:none;
+    text-align:left;
+    font-size:13.5px;
+    font-weight:600;
+    font-family:inherit;
+    cursor:pointer;
+    transition:background 140ms ease, transform 140ms ease;
+  }
+  .directions-pop-toggle:hover{background:var(--blue-soft); transform:translateX(2px);}
+
+  .driving-detail{
+    overflow:hidden;
+    max-height:0;
+    opacity:0;
+    transition:max-height 260ms cubic-bezier(.25,.46,.45,.94), opacity 200ms ease, padding 260ms ease;
+    font-size:12.5px;
+    line-height:1.55;
+    color:var(--ink-soft);
+    padding:0 12px;
+    border-radius:var(--radius-inner);
+  }
+  .driving-detail.open{
+    max-height:220px;
+    opacity:1;
+    padding:2px 12px 12px;
+  }
+  .driving-detail strong{color:var(--ink); font-weight:700;}
   @media (max-width:640px){
     .directions-wrap{position:static; margin-top:16px;}
     .directions-pop{right:0; left:auto;}
@@ -361,6 +399,14 @@
         <div class="day-head"><div class="dow">Sat</div><div class="date">Jul 18</div></div>
         <div class="block"><div class="label">Morning</div><div class="content">Arrival &amp; settle in</div></div>
         <div class="block dinner"><div class="label">Dinner host</div><div class="content tbd" style="font-style:italic;color:var(--ink-soft);">Open — TBD</div></div>
+        <div class="block note"><div class="label">Notes</div><div class="content" style="font-size:12px;line-height:1.45;">
+          <ul style="margin:0;padding-left:16px;">
+            <li>Hwy 76 → south at light onto Indian Point Rd (Silver Dollar City turn)</li>
+            <li>Stay left, ~2mi to entrance</li>
+            <li>Entrance on left (three stone waterfalls)</li>
+            <li>Left on Village Trail — Clubhouse ahead</li>
+          </ul>
+        </div></div>
       </div>
 
       <div class="day">
