@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Table Rock Lake Family Reunion 2025</title>
+<style>
+  :root{
+    --bg:#f5f3ee;
+    --card:#ffffff;
+    --ink:#1c2b33;
+    --ink-soft:#5b6a72;
+    --line:rgba(20,30,40,0.08);
+    --navy:#1d4e6b;
+    --navy-deep:#123245;
+    --gold:#c99a3c;
+    --green:#3f7a52;
+    --blue-soft:#e7f0f5;
+    --shadow-1: 0px 0px 0px 1px rgba(20,30,40,0.06), 0px 1px 2px -1px rgba(20,30,40,0.06), 0px 2px 4px 0px rgba(20,30,40,0.04);
+    --shadow-1-hover: 0px 0px 0px 1px rgba(20,30,40,0.09), 0px 2px 6px -1px rgba(20,30,40,0.10), 0px 4px 10px 0px rgba(20,30,40,0.06);
+    --radius-outer: 20px;
+    --radius-inner: 12px;
+    --pad: 8px;
+  }
+  *{box-sizing:border-box;}
+  html,body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:32px 20px 80px;}
+
+  header.hero{
+    background:linear-gradient(135deg,var(--navy) 0%,var(--navy-deep) 100%);
+    color:#fff;
+    border-radius:var(--radius-outer);
+    padding:36px 40px;
+    box-shadow:var(--shadow-1);
+    margin-bottom:28px;
+    position:relative;
+    overflow:hidden;
+  }
+  header.hero::after{
+    content:"";
+    position:absolute; inset:0;
+    background:radial-gradient(600px 200px at 85% -20%, rgba(255,255,255,0.10), transparent 60%);
+    pointer-events:none;
+  }
+  header.hero h1{
+    margin:0 0 6px;
+    font-size:32px;
+    font-weight:700;
+    letter-spacing:-0.01em;
+    text-wrap:balance;
+  }
+  header.hero p{
+    margin:0;
+    font-size:15px;
+    color:rgba(255,255,255,0.75);
+    text-wrap:pretty;
+  }
+  header.hero .wave{font-size:26px; margin-right:10px; vertical-align:-2px;}
+
+  section{margin-bottom:28px;}
+  h2.section-title{
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--ink-soft);
+    font-weight:700;
+    margin:0 0 14px 2px;
+  }
+
+  /* ===== Day cards grid ===== */
+  .days{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:14px;
+  }
+  @media (max-width:1000px){ .days{grid-template-columns:repeat(3,1fr);} }
+  @media (max-width:640px){ .days{grid-template-columns:repeat(1,1fr);} }
+
+  .day{
+    background:var(--card);
+    border-radius:var(--radius-outer);
+    box-shadow:var(--shadow-1);
+    padding:var(--pad);
+    transition:box-shadow 220ms ease, transform 220ms cubic-bezier(.25,.46,.45,.94);
+    animation:enter 640ms cubic-bezier(.25,.46,.45,.94) both;
+  }
+  .day:hover{
+    box-shadow:var(--shadow-1-hover);
+    transform:translateY(-2px);
+  }
+  .day-head{
+    border-radius:var(--radius-inner);
+    padding:10px 12px;
+    background:var(--blue-soft);
+    margin-bottom:8px;
+  }
+  .day-head .dow{
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:0.06em;
+    color:var(--navy);
+    text-transform:uppercase;
+  }
+  .day-head .date{
+    font-size:20px;
+    font-weight:700;
+    font-variant-numeric:tabular-nums;
+    color:var(--navy-deep);
+    margin-top:1px;
+  }
+  .day.reunion-start .day-head{background:linear-gradient(135deg,#e7f0f5,#dcebe0);}
+
+  .block{
+    border-radius:var(--radius-inner);
+    padding:9px 12px;
+    margin-bottom:6px;
+    background:transparent;
+    transition:background 160ms ease, transform 160ms ease;
+    cursor:default;
+  }
+  .block:hover{
+    background:rgba(29,78,107,0.05);
+    transform:translateX(2px);
+  }
+  .block:last-child{margin-bottom:0;}
+  .block .label{
+    font-size:10px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    color:var(--ink-soft);
+    margin-bottom:2px;
+  }
+  .block .content{
+    font-size:13px;
+    line-height:1.4;
+    color:var(--ink);
+    text-wrap:pretty;
+  }
+  .block.tbd .content{color:var(--ink-soft); font-style:italic;}
+  .block.dinner{
+    background:linear-gradient(135deg,#9db8c9,#7fa1b8);
+    box-shadow:inset 0 0 0 1px rgba(18,50,69,0.15);
+  }
+  .block.dinner:hover{background:linear-gradient(135deg,#93b0c3,#719ab3);}
+  .block.dinner .label{color:var(--navy-deep); opacity:0.85;}
+  .block.dinner .content{color:var(--navy-deep); font-weight:700; font-size:13.5px;}
+  .block.note{background:#fbf3de;}
+  .block.note:hover{background:#f7ecc7;}
+  .block.empty .content{color:#b7bfc4;}
+
+  /* reserved banners — aligned to the day grid columns beneath them */
+  .reserved-grid{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:14px;
+    margin-bottom:8px;
+  }
+  @media (max-width:1000px){ .reserved-grid{display:none;} }
+  .reserved{
+    grid-row:1;
+    border-radius:var(--radius-outer);
+    padding:9px 14px;
+    font-size:11.5px;
+    font-weight:700;
+    letter-spacing:0.02em;
+    color:#fff;
+    text-align:center;
+    box-shadow:var(--shadow-1);
+    transition:box-shadow 200ms ease, transform 200ms ease;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+  }
+  .reserved:hover{box-shadow:var(--shadow-1-hover); transform:translateY(-1px);}
+  .reserved.conf{
+    grid-column:3 / 6;
+    background:linear-gradient(90deg,var(--green),#2e5f3f);
+  }
+  .reserved.pontoon{
+    grid-column:4 / 6;
+    background:linear-gradient(90deg,var(--gold),#a97e28);
+  }
+  .reserved .arrow{opacity:0.7; font-size:10px;}
+
+  /* mobile fallback badges, shown inside day-head on small screens */
+  .reserve-badge{display:none; font-size:9.5px; font-weight:700; letter-spacing:0.03em; border-radius:999px; padding:2px 8px; margin-top:5px; color:#fff; width:fit-content;}
+  @media (max-width:1000px){ .reserve-badge{display:inline-flex;} }
+  .reserve-badge.conf{background:var(--green);}
+  .reserve-badge.pontoon{background:var(--gold); margin-left:4px;}
+  .badge-row{display:flex; flex-wrap:wrap;}
+
+  /* ===== Info grid ===== */
+  .info-grid{
+    display:grid;
+    grid-template-columns:1.1fr 1.1fr 1.3fr;
+    gap:14px;
+  }
+  @media (max-width:860px){ .info-grid{grid-template-columns:1fr;} }
+
+  .panel{
+    background:var(--card);
+    border-radius:var(--radius-outer);
+    box-shadow:var(--shadow-1);
+    padding:var(--pad);
+    transition:box-shadow 220ms ease;
+  }
+  .panel:hover{box-shadow:var(--shadow-1-hover);}
+  .panel-head{
+    border-radius:var(--radius-inner);
+    padding:10px 14px;
+    font-size:13px;
+    font-weight:700;
+    color:#fff;
+    margin-bottom:8px;
+  }
+  .panel-head.conf{background:var(--green);}
+  .panel-head.rainy{background:var(--navy-deep);}
+  .panel-head.boat{background:#2b6f8f;}
+  .panel-head.stores{background:#7a6a4f;}
+  .panel-head.condo{background:var(--navy);}
+
+  .row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:9px 14px;
+    border-radius:var(--radius-inner);
+    font-size:13px;
+    transition:background 150ms ease, transform 150ms ease;
+  }
+  .row:hover{background:rgba(29,78,107,0.05); transform:translateX(2px);}
+  .row .name{color:var(--ink); font-weight:500;}
+  .row .val{color:var(--ink-soft); font-variant-numeric:tabular-nums;}
+  .row a{color:var(--navy); text-decoration:none; border-bottom:1px solid rgba(29,78,107,0.25); transition:border-color 150ms ease;}
+  .row a:hover{border-color:var(--navy);}
+
+  .condo-panel .row-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:2px 6px;
+  }
+
+  footer.legend{
+    margin-top:8px;
+    font-size:12px;
+    color:var(--ink-soft);
+    text-wrap:pretty;
+  }
+  footer.legend em{color:var(--gold); font-style:italic;}
+
+  @keyframes enter{
+    from{opacity:0; filter:blur(6px); transform:translateY(8px);}
+  }
+  .day:nth-child(1){animation-delay:0ms;}
+  .day:nth-child(2){animation-delay:40ms;}
+  .day:nth-child(3){animation-delay:80ms;}
+  .day:nth-child(4){animation-delay:120ms;}
+  .day:nth-child(5){animation-delay:160ms;}
+  .day:nth-child(6){animation-delay:200ms;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <h1><span class="wave">🌊</span>Table Rock Lake Family Reunion 2025</h1>
+    <p>July 18–23 &nbsp;•&nbsp; The Village at Indian Point, 24 Village Trail, Branson, MO 65616</p>
+  </header>
+
+  <section>
+    <div class="reserved-grid">
+      <div class="reserved conf"><span class="arrow">◀</span>Conference Room Reserved<span class="arrow">▶</span></div>
+      <div class="reserved pontoon"><span class="arrow">◀</span>Pontoon Reserved<span class="arrow">▶</span></div>
+    </div>
+
+    <div class="days">
+
+      <div class="day">
+        <div class="day-head"><div class="dow">Sat</div><div class="date">Jul 18</div></div>
+        <div class="block"><div class="label">Morning</div><div class="content">Arrival &amp; settle in</div></div>
+        <div class="block note"><div class="label">Notes</div><div class="content"><a href="#" style="color:inherit;border-bottom:1px solid rgba(90,60,10,0.3);">Directions</a></div></div>
+        <div class="block dinner"><div class="label">Dinner host</div><div class="content tbd" style="font-style:italic;color:var(--ink-soft);">Open — TBD</div></div>
+      </div>
+
+      <div class="day">
+        <div class="day-head"><div class="dow">Sun</div><div class="date">Jul 19</div></div>
+        <div class="block"><div class="label">Morning</div><div class="content">Mass @ Our Lady of the Cove — 8am or 10am</div></div>
+        <div class="block tbd"><div class="label">Afternoon</div><div class="content">World Cup Final ⚽ 2pm (location TBD)<br>Line dancing (location TBD)</div></div>
+        <div class="block"><div class="label">Evening</div><div class="content">Boat sunset cruise 🛥️</div></div>
+        <div class="block dinner"><div class="label">Dinner host</div><div class="content">Grantham / Dillon — BBQ 🍖</div></div>
+      </div>
+
+      <div class="day">
+        <div class="day-head"><div class="dow">Mon</div><div class="date">Jul 20</div>
+          <div class="badge-row"><span class="reserve-badge conf">🟩 Conf. room</span></div>
+        </div>
+        <div class="block"><div class="label">Morning</div><div class="content">Gentlemen's golf day ⛳</div></div>
+        <div class="block"><div class="label">Afternoon</div><div class="content">Music / concert, 3–4pm</div></div>
+        <div class="block tbd"><div class="label">Evening</div><div class="content">Ashley baby shower — TBD</div></div>
+        <div class="block dinner"><div class="label">Dinner host</div><div class="content">Simpson / Taylor — Lasagna night 🍝</div></div>
+      </div>
+
+      <div class="day">
+        <div class="day-head"><div class="dow">Tue</div><div class="date">Jul 21</div>
+          <div class="badge-row"><span class="reserve-badge conf">🟩 Conf. room</span><span class="reserve-badge pontoon">🟨 Pontoon</span></div>
+        </div>
+        <div class="block"><div class="label">Morning</div><div class="content">Ladies' spa day 💅 (all day)</div></div>
+        <div class="block"><div class="label">Afternoon</div><div class="content">Music / concert, 3–4pm</div></div>
+        <div class="block"><div class="label">Evening</div><div class="content">Pontoon sunset cruise 🛥️</div></div>
+        <div class="block dinner"><div class="label">Dinner host</div><div class="content">Sevec / Thompson — Taco night 🌮</div></div>
+        <div class="block note tbd"><div class="label">Notes</div><div class="content">Shepherd of the Hills drama, 7:30pm TBD</div></div>
+      </div>
+
+      <div class="day">
+        <div class="day-head"><div class="dow">Wed</div><div class="date">Jul 22</div>
+          <div class="badge-row"><span class="reserve-badge conf">🟩 Conf. room</span><span class="reserve-badge pontoon">🟨 Pontoon</span></div>
+        </div>
+        <div class="block"><div class="label">Morning</div><div class="content">Brunch 🥐</div></div>
+        <div class="block"><div class="label">Afternoon</div><div class="content">Music / concert, 3–4pm</div></div>
+        <div class="block"><div class="label">Evening</div><div class="content">Dolly Parton Stampede ~5:30pm (or earlier)</div></div>
+        <div class="block dinner"><div class="label">Dinner host</div><div class="content">Leftovers, otherwise Millennial / Gen Z dinner</div></div>
+        <div class="block note tbd"><div class="label">Notes</div><div class="content">Silver Dollar City? TBD</div></div>
+      </div>
+
+      <div class="day">
+        <div class="day-head"><div class="dow">Thu</div><div class="date">Jul 23</div></div>
+        <div class="block"><div class="label">Morning</div><div class="content">Checkout &amp; departure 👋</div></div>
+        <div class="block empty"><div class="content">— safe travels —</div></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Activities &amp; logistics</h2>
+    <div class="info-grid">
+
+      <div class="panel">
+        <div class="panel-head conf">🟩 Conference room activities</div>
+        <div class="row"><span class="name">🀄 Mahjong</span></div>
+        <div class="row"><span class="name">🎤 Karaoke night</span></div>
+        <div class="row"><span class="name">🎵 Music / concert</span></div>
+        <div class="row"><span class="name">✂️ Crafts and games</span></div>
+        <div class="row"><span class="name">💃 Line dancing</span></div>
+        <div class="panel-head rainy" style="margin-top:10px;">☔ Rainy day activities</div>
+        <div class="row"><span class="name">🎬 The Odyssey in IMAX</span></div>
+        <div class="row"><span class="name">🛍️ Tanger Outlets Branson</span></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head boat">⛵ Boating (all week)</div>
+        <div class="row"><span class="name">🏄 Wake surf lessons &amp; sessions</span></div>
+        <div class="row"><span class="name">🌅 Sunset cruises</span></div>
+        <div class="row"><span class="name">🤿 Cliff jumping / coving out</span></div>
+        <div class="panel-head stores" style="margin-top:10px;">🏬 Nearby stores</div>
+        <div class="row"><span class="name">🛒 Costco</span><span class="val">Springfield, MO</span></div>
+        <div class="row"><span class="name">🛒 King's Food Saver</span><span class="val">Branson West</span></div>
+        <div class="row"><span class="name">🛒 Harter House</span><span class="val">Branson area</span></div>
+      </div>
+
+      <div class="panel condo-panel">
+        <div class="panel-head condo">🏠 Condo assignments</div>
+        <div class="row-grid">
+          <div class="row"><span class="name">Granthams</span><span class="val">1401</span></div>
+          <div class="row"><span class="name">Kathleen</span><span class="val">1505</span></div>
+          <div class="row"><span class="name">Dillons</span><span class="val">1406</span></div>
+          <div class="row"><span class="name">M. Thompsons</span><span class="val">1509</span></div>
+          <div class="row"><span class="name">MN Richters</span><span class="val">1605</span></div>
+          <div class="row"><span class="name">Whalins</span><span class="val">1507</span></div>
+          <div class="row"><span class="name">Sevecs</span><span class="val">1403</span></div>
+          <div class="row"><span class="name">Taylors</span><span class="val">1512</span></div>
+          <div class="row"><span class="name">Simpsons</span><span class="val">1511</span></div>
+          <div class="row"><span class="name">Dial Richters</span><span class="val">1504</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <footer class="legend">* <em>Italicized / gray</em> items are TBD — will depend on interest and coordination. Conference room available Mon Jul 20 – Wed Jul 22.</footer>
+  </section>
+
+</div>
+</body>
+</html>
