@@ -64,6 +64,69 @@
   }
   header.hero .wave{font-size:26px; margin-right:10px; vertical-align:-2px;}
 
+  .directions-wrap{position:absolute; top:32px; right:36px;}
+  .directions-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    background:rgba(255,255,255,0.14);
+    color:#fff;
+    border:1px solid rgba(255,255,255,0.22);
+    border-radius:999px;
+    padding:9px 18px;
+    font-size:13.5px;
+    font-weight:600;
+    cursor:pointer;
+    backdrop-filter:blur(6px);
+    transition:background 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+  }
+  .directions-btn:hover{
+    background:rgba(255,255,255,0.22);
+    transform:translateY(-1px);
+    box-shadow:0 4px 14px rgba(0,0,0,0.18);
+  }
+  .directions-btn:active{transform:translateY(0);}
+
+  .directions-pop{
+    position:absolute;
+    top:calc(100% + 10px);
+    right:0;
+    background:var(--card);
+    border-radius:var(--radius-outer);
+    box-shadow:var(--shadow-1-hover);
+    padding:8px;
+    min-width:200px;
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(-6px) scale(0.98);
+    transform-origin:top right;
+    transition:opacity 160ms ease, transform 160ms cubic-bezier(.25,.46,.45,.94), visibility 160ms;
+    z-index:20;
+  }
+  .directions-pop.open{
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0) scale(1);
+  }
+  .directions-pop a{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    padding:10px 12px;
+    border-radius:var(--radius-inner);
+    color:var(--ink);
+    text-decoration:none;
+    font-size:13.5px;
+    font-weight:600;
+    transition:background 140ms ease, transform 140ms ease;
+  }
+  .directions-pop a:hover{background:var(--blue-soft); transform:translateX(2px);}
+  .directions-pop .icon{font-size:16px;}
+  @media (max-width:640px){
+    .directions-wrap{position:static; margin-top:16px;}
+    .directions-pop{right:0; left:auto;}
+  }
+
   section{margin-bottom:28px;}
   h2.section-title{
     font-size:13px;
@@ -276,6 +339,14 @@
   <header class="hero">
     <h1><span class="wave">🌊</span>Table Rock Lake Family Reunion 2025</h1>
     <p>July 18–23 &nbsp;•&nbsp; The Village at Indian Point, 24 Village Trail, Branson, MO 65616</p>
+
+    <div class="directions-wrap">
+      <button class="directions-btn" id="directionsBtn" type="button">📍 Directions</button>
+      <div class="directions-pop" id="directionsPop">
+        <a href="https://maps.apple/p/v_jTUGEqNpJ4vb" target="_blank" rel="noopener"><span class="icon">🗺️</span>Apple Maps</a>
+        <a href="https://maps.app.goo.gl/ZL8NaEpA8ByEjRNf6" target="_blank" rel="noopener"><span class="icon">📌</span>Google Maps</a>
+      </div>
+    </div>
   </header>
 
   <section>
@@ -289,7 +360,6 @@
       <div class="day">
         <div class="day-head"><div class="dow">Sat</div><div class="date">Jul 18</div></div>
         <div class="block"><div class="label">Morning</div><div class="content">Arrival &amp; settle in</div></div>
-        <div class="block note"><div class="label">Notes</div><div class="content"><a href="#" style="color:inherit;border-bottom:1px solid rgba(90,60,10,0.3);">Directions</a></div></div>
         <div class="block dinner"><div class="label">Dinner host</div><div class="content tbd" style="font-style:italic;color:var(--ink-soft);">Open — TBD</div></div>
       </div>
 
@@ -391,5 +461,18 @@
   </section>
 
 </div>
+<script>
+  const dBtn = document.getElementById('directionsBtn');
+  const dPop = document.getElementById('directionsPop');
+  dBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    dPop.classList.toggle('open');
+  });
+  document.addEventListener('click', (e) => {
+    if (!dPop.contains(e.target) && e.target !== dBtn) {
+      dPop.classList.remove('open');
+    }
+  });
+</script>
 </body>
 </html>
