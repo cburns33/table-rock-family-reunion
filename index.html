@@ -622,7 +622,7 @@
     80:'🌦️',81:'🌦️',82:'⛈️',
     95:'⛈️',96:'⛈️',99:'⛈️'
   };
-  fetch('https://api.open-meteo.com/v1/forecast?latitude=36.6357&longitude=93.2110&daily=weathercode,temperature_2m_max,temperature_2m_min&temperature_unit=fahrenheit&timezone=America%2FChicago&start_date=2026-07-18&end_date=2026-07-23')
+  fetch('https://api.open-meteo.com/v1/forecast?latitude=36.6357&longitude=-93.2110&daily=weathercode,temperature_2m_max,temperature_2m_min&temperature_unit=fahrenheit&timezone=America%2FChicago&start_date=2026-07-18&end_date=2026-07-23')
     .then(r => r.ok ? r.json() : Promise.reject(r.status))
     .then(data => {
       const days = data.daily.time;
