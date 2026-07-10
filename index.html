@@ -64,7 +64,7 @@
   }
   header.hero .wave{font-size:26px; margin-right:10px; vertical-align:-2px;}
 
-  .directions-wrap{position:absolute; top:32px; right:36px;}
+  .directions-wrap{position:absolute; top:32px; right:36px; display:flex; gap:8px;}
   .directions-btn{
     display:inline-flex;
     align-items:center;
@@ -76,6 +76,7 @@
     padding:9px 18px;
     font-size:13.5px;
     font-weight:600;
+    text-decoration:none;
     cursor:pointer;
     backdrop-filter:blur(6px);
     transition:background 160ms ease, transform 160ms ease, box-shadow 160ms ease;
@@ -161,7 +162,7 @@
   }
   .driving-detail strong{color:var(--ink); font-weight:700;}
   @media (max-width:640px){
-    .directions-wrap{position:static; margin-top:16px;}
+    .directions-wrap{position:static; margin-top:16px; flex-wrap:wrap;}
     .directions-pop{right:0; left:auto;}
   }
 
@@ -217,6 +218,39 @@
     margin-top:1px;
   }
   .day.reunion-start .day-head{background:linear-gradient(135deg,#e7f0f5,#dcebe0);}
+
+  .day.is-today{box-shadow:0 0 0 2px var(--gold), var(--shadow-1);}
+  .day.is-today:hover{box-shadow:0 0 0 2px var(--gold), var(--shadow-1-hover);}
+  .today-badge{
+    display:none;
+    font-size:9.5px;
+    font-weight:700;
+    letter-spacing:0.03em;
+    text-transform:uppercase;
+    border-radius:999px;
+    padding:2px 8px;
+    margin-top:5px;
+    color:#fff;
+    width:fit-content;
+    background:var(--gold);
+  }
+  .day.is-today .today-badge{display:inline-flex;}
+
+  .weather-badge{
+    font-size:9.5px;
+    font-weight:700;
+    letter-spacing:0.02em;
+    border-radius:999px;
+    padding:2px 8px;
+    margin-top:5px;
+    margin-left:4px;
+    color:var(--ink-soft);
+    background:rgba(20,30,40,0.06);
+    width:fit-content;
+    font-variant-numeric:tabular-nums;
+    display:none;
+  }
+  .weather-badge.loaded{display:inline-flex;}
 
   .block{
     border-radius:var(--radius-inner);
@@ -299,7 +333,39 @@
   @media (max-width:1000px){ .reserve-badge{display:inline-flex;} }
   .reserve-badge.conf{background:var(--green);}
   .reserve-badge.pontoon{background:var(--gold); margin-left:4px;}
-  .badge-row{display:flex; flex-wrap:wrap;}
+  .badge-row{display:flex; flex-wrap:wrap; align-items:center;}
+
+  /* sticky day-nav pills, mobile/tablet only */
+  .day-nav{
+    display:none;
+    gap:6px;
+    overflow-x:auto;
+    padding:8px 8px;
+    margin-bottom:12px;
+    background:var(--card);
+    border-radius:999px;
+    box-shadow:var(--shadow-1);
+    position:sticky;
+    top:8px;
+    z-index:10;
+    -ms-overflow-style:none;
+    scrollbar-width:none;
+  }
+  .day-nav::-webkit-scrollbar{display:none;}
+  @media (max-width:1000px){ .day-nav{display:flex;} }
+  .day-nav a{
+    flex:0 0 auto;
+    padding:7px 14px;
+    border-radius:999px;
+    background:var(--blue-soft);
+    color:var(--navy-deep);
+    font-size:12px;
+    font-weight:700;
+    text-decoration:none;
+    transition:background 140ms ease, transform 140ms ease;
+  }
+  .day-nav a:hover{background:#dbe8ef; transform:translateY(-1px);}
+  .day-nav a.is-today{background:var(--gold); color:#fff;}
 
   /* ===== Info grid ===== */
   .info-grid{
@@ -379,6 +445,8 @@
     <p>July 18–23 &nbsp;•&nbsp; The Village at Indian Point, 24 Village Trail, Branson, MO 65616</p>
 
     <div class="directions-wrap">
+      <!-- TODO: swap href for the real shared album link -->
+      <a class="directions-btn" href="#" target="_blank" rel="noopener">📸 Photos</a>
       <button class="directions-btn" id="directionsBtn" type="button">📍 Directions</button>
       <div class="directions-pop" id="directionsPop">
         <a href="https://maps.apple/p/v_jTUGEqNpJ4vb" target="_blank" rel="noopener"><span class="icon">🗺️</span>Apple Maps</a>
@@ -393,10 +461,21 @@
       <div class="reserved pontoon"><span class="arrow">◀</span>Pontoon Reserved<span class="arrow">▶</span></div>
     </div>
 
+    <nav class="day-nav">
+      <a href="#day-sat" data-date="2026-07-18">Sat 18</a>
+      <a href="#day-sun" data-date="2026-07-19">Sun 19</a>
+      <a href="#day-mon" data-date="2026-07-20">Mon 20</a>
+      <a href="#day-tue" data-date="2026-07-21">Tue 21</a>
+      <a href="#day-wed" data-date="2026-07-22">Wed 22</a>
+      <a href="#day-thu" data-date="2026-07-23">Thu 23</a>
+    </nav>
+
     <div class="days">
 
-      <div class="day">
-        <div class="day-head"><div class="dow">Sat</div><div class="date">Jul 18</div></div>
+      <div class="day" id="day-sat" data-date="2026-07-18">
+        <div class="day-head"><div class="dow">Sat</div><div class="date">Jul 18</div>
+          <div class="badge-row"><span class="today-badge">Today</span><span class="weather-badge"></span></div>
+        </div>
         <div class="block"><div class="label">Morning</div><div class="content">Arrival &amp; settle in</div></div>
         <div class="block dinner"><div class="label">Dinner host</div><div class="content tbd" style="font-style:italic;color:var(--ink-soft);">Open — TBD</div></div>
         <div class="block note"><div class="label">Notes</div><div class="content" style="font-size:12px;line-height:1.45;">
@@ -409,17 +488,19 @@
         </div></div>
       </div>
 
-      <div class="day">
-        <div class="day-head"><div class="dow">Sun</div><div class="date">Jul 19</div></div>
+      <div class="day" id="day-sun" data-date="2026-07-19">
+        <div class="day-head"><div class="dow">Sun</div><div class="date">Jul 19</div>
+          <div class="badge-row"><span class="today-badge">Today</span><span class="weather-badge"></span></div>
+        </div>
         <div class="block"><div class="label">Morning</div><div class="content">Mass @ Our Lady of the Cove — 8am or 10am</div></div>
         <div class="block tbd"><div class="label">Afternoon</div><div class="content">World Cup Final ⚽ 2pm (location TBD)<br>Line dancing (location TBD)</div></div>
         <div class="block"><div class="label">Evening</div><div class="content">Boat sunset cruise 🛥️</div></div>
         <div class="block dinner"><div class="label">Dinner host</div><div class="content">Grantham / Dillon — BBQ 🍖</div></div>
       </div>
 
-      <div class="day">
+      <div class="day" id="day-mon" data-date="2026-07-20">
         <div class="day-head"><div class="dow">Mon</div><div class="date">Jul 20</div>
-          <div class="badge-row"><span class="reserve-badge conf">🟩 Conf. room</span></div>
+          <div class="badge-row"><span class="reserve-badge conf">🟩 Conf. room</span><span class="today-badge">Today</span><span class="weather-badge"></span></div>
         </div>
         <div class="block"><div class="label">Morning</div><div class="content">Gentlemen's golf day ⛳</div></div>
         <div class="block"><div class="label">Afternoon</div><div class="content">Music / concert, 3–4pm</div></div>
@@ -427,9 +508,9 @@
         <div class="block dinner"><div class="label">Dinner host</div><div class="content">Simpson / Taylor — Lasagna night 🍝</div></div>
       </div>
 
-      <div class="day">
+      <div class="day" id="day-tue" data-date="2026-07-21">
         <div class="day-head"><div class="dow">Tue</div><div class="date">Jul 21</div>
-          <div class="badge-row"><span class="reserve-badge conf">🟩 Conf. room</span><span class="reserve-badge pontoon">🟨 Pontoon</span></div>
+          <div class="badge-row"><span class="reserve-badge conf">🟩 Conf. room</span><span class="reserve-badge pontoon">🟨 Pontoon</span><span class="today-badge">Today</span><span class="weather-badge"></span></div>
         </div>
         <div class="block"><div class="label">Morning</div><div class="content">Ladies' spa day 💅 (all day)</div></div>
         <div class="block"><div class="label">Afternoon</div><div class="content">Music / concert, 3–4pm</div></div>
@@ -438,9 +519,9 @@
         <div class="block note tbd"><div class="label">Notes</div><div class="content">Shepherd of the Hills drama, 7:30pm TBD</div></div>
       </div>
 
-      <div class="day">
+      <div class="day" id="day-wed" data-date="2026-07-22">
         <div class="day-head"><div class="dow">Wed</div><div class="date">Jul 22</div>
-          <div class="badge-row"><span class="reserve-badge conf">🟩 Conf. room</span><span class="reserve-badge pontoon">🟨 Pontoon</span></div>
+          <div class="badge-row"><span class="reserve-badge conf">🟩 Conf. room</span><span class="reserve-badge pontoon">🟨 Pontoon</span><span class="today-badge">Today</span><span class="weather-badge"></span></div>
         </div>
         <div class="block"><div class="label">Morning</div><div class="content">Brunch 🥐</div></div>
         <div class="block"><div class="label">Afternoon</div><div class="content">Music / concert, 3–4pm</div></div>
@@ -449,8 +530,10 @@
         <div class="block note tbd"><div class="label">Notes</div><div class="content">Silver Dollar City? TBD</div></div>
       </div>
 
-      <div class="day">
-        <div class="day-head"><div class="dow">Thu</div><div class="date">Jul 23</div></div>
+      <div class="day" id="day-thu" data-date="2026-07-23">
+        <div class="day-head"><div class="dow">Thu</div><div class="date">Jul 23</div>
+          <div class="badge-row"><span class="today-badge">Today</span><span class="weather-badge"></span></div>
+        </div>
         <div class="block"><div class="label">Morning</div><div class="content">Checkout &amp; departure 👋</div></div>
         <div class="block empty"><div class="content">— safe travels —</div></div>
       </div>
@@ -519,6 +602,41 @@
       dPop.classList.remove('open');
     }
   });
+
+  // Today highlighting
+  const todayStr = new Date().toLocaleDateString('en-CA'); // YYYY-MM-DD, local time
+  document.querySelectorAll('.day[data-date]').forEach(day => {
+    if (day.dataset.date === todayStr) day.classList.add('is-today');
+  });
+  document.querySelectorAll('.day-nav a[data-date]').forEach(link => {
+    if (link.dataset.date === todayStr) link.classList.add('is-today');
+  });
+
+  // Weather badges (Open-Meteo, no API key required)
+  const WEATHER_ICONS = {
+    0:'☀️',1:'🌤️',2:'⛅',3:'☁️',
+    45:'🌫️',48:'🌫️',
+    51:'🌦️',53:'🌦️',55:'🌦️',
+    61:'🌧️',63:'🌧️',65:'🌧️',
+    71:'🌨️',73:'🌨️',75:'🌨️',
+    80:'🌦️',81:'🌦️',82:'⛈️',
+    95:'⛈️',96:'⛈️',99:'⛈️'
+  };
+  fetch('https://api.open-meteo.com/v1/forecast?latitude=36.6357&longitude=93.2110&daily=weathercode,temperature_2m_max,temperature_2m_min&temperature_unit=fahrenheit&timezone=America%2FChicago&start_date=2026-07-18&end_date=2026-07-23')
+    .then(r => r.ok ? r.json() : Promise.reject(r.status))
+    .then(data => {
+      const days = data.daily.time;
+      days.forEach((dateStr, i) => {
+        const badge = document.querySelector(`.day[data-date="${dateStr}"] .weather-badge`);
+        if (!badge) return;
+        const icon = WEATHER_ICONS[data.daily.weathercode[i]] || '🌡️';
+        const hi = Math.round(data.daily.temperature_2m_max[i]);
+        const lo = Math.round(data.daily.temperature_2m_min[i]);
+        badge.textContent = `${icon} ${hi}°/${lo}°`;
+        badge.classList.add('loaded');
+      });
+    })
+    .catch(() => { /* weather unavailable — badges simply stay hidden */ });
 </script>
 </body>
 </html>
