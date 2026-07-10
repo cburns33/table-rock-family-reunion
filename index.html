@@ -619,31 +619,21 @@
     if (link.dataset.date === todayStr) link.classList.add('is-today');
   });
 
-  // Weather badges (Open-Meteo, no API key required)
-  const WEATHER_ICONS = {
-    0:'☀️',1:'🌤️',2:'⛅',3:'☁️',
-    45:'🌫️',48:'🌫️',
-    51:'🌦️',53:'🌦️',55:'🌦️',
-    61:'🌧️',63:'🌧️',65:'🌧️',
-    71:'🌨️',73:'🌨️',75:'🌨️',
-    80:'🌦️',81:'🌦️',82:'⛈️',
-    95:'⛈️',96:'⛈️',99:'⛈️'
+  // Weather badges — static forecast (API-sourced forecasts were unreliable this far out)
+  const WEATHER = {
+    '2026-07-18': { icon:'⛅', hi:91, lo:72 },
+    '2026-07-19': { icon:'⛅', hi:91, lo:72 },
+    '2026-07-20': { icon:'⛅', hi:93, lo:72 },
+    '2026-07-21': { icon:'⛅', hi:92, lo:73 },
+    '2026-07-22': { icon:'⛅', hi:91, lo:73 },
+    '2026-07-23': { icon:'⛅', hi:93, lo:73 }
   };
-  fetch('https://api.open-meteo.com/v1/forecast?latitude=36.6357&longitude=-93.2110&daily=weathercode,temperature_2m_max,temperature_2m_min&temperature_unit=fahrenheit&timezone=America%2FChicago&start_date=2026-07-18&end_date=2026-07-23')
-    .then(r => r.ok ? r.json() : Promise.reject(r.status))
-    .then(data => {
-      const days = data.daily.time;
-      days.forEach((dateStr, i) => {
-        const badge = document.querySelector(`.day[data-date="${dateStr}"] .weather-badge`);
-        if (!badge) return;
-        const icon = WEATHER_ICONS[data.daily.weathercode[i]] || '🌡️';
-        const hi = Math.round(data.daily.temperature_2m_max[i]);
-        const lo = Math.round(data.daily.temperature_2m_min[i]);
-        badge.textContent = `${icon} ${hi}°/${lo}°`;
-        badge.classList.add('loaded');
-      });
-    })
-    .catch(() => { /* weather unavailable — badges simply stay hidden */ });
+  Object.entries(WEATHER).forEach(([dateStr, w]) => {
+    const badge = document.querySelector(`.day[data-date="${dateStr}"] .weather-badge`);
+    if (!badge) return;
+    badge.textContent = `${w.icon} ${w.hi}°/${w.lo}°`;
+    badge.classList.add('loaded');
+  });
 </script>
 </body>
 </html>
