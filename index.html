@@ -248,9 +248,14 @@
     background:rgba(20,30,40,0.06);
     width:fit-content;
     font-variant-numeric:tabular-nums;
-    display:none;
+    display:inline-flex;
+    opacity:0;
+    visibility:hidden;
+    transform:scale(0.92);
+    filter:blur(3px);
+    transition:opacity 240ms ease, transform 240ms cubic-bezier(.25,.46,.45,.94), filter 240ms ease, visibility 240ms;
   }
-  .weather-badge.loaded{display:inline-flex;}
+  .weather-badge.loaded{opacity:1; visibility:visible; transform:scale(1); filter:blur(0);}
 
   .block{
     border-radius:var(--radius-inner);
@@ -279,6 +284,8 @@
     color:var(--ink);
     text-wrap:pretty;
   }
+  .block .content a{color:var(--navy); text-decoration:none; border-bottom:1px solid rgba(29,78,107,0.25); transition:border-color 150ms ease;}
+  .block .content a:hover{border-color:var(--navy);}
   .block.tbd .content{color:var(--ink-soft); font-style:italic;}
   .block.dinner{
     background:linear-gradient(135deg,#9db8c9,#7fa1b8);
@@ -524,7 +531,7 @@
         </div>
         <div class="block"><div class="label">Morning</div><div class="content">Brunch 🥐</div></div>
         <div class="block"><div class="label">Afternoon</div><div class="content">Music / concert, 3–4pm</div></div>
-        <div class="block"><div class="label">Evening</div><div class="content">Dolly Parton Stampede ~5:30pm (or earlier)</div></div>
+        <div class="block"><div class="label">Evening</div><div class="content"><a href="https://dpstampede.com/branson" target="_blank" rel="noopener">Dolly Parton Stampede</a> ~5:30pm (or earlier)</div></div>
         <div class="block dinner"><div class="label">Dinner host</div><div class="content">Leftovers, otherwise Millennial / Gen Z dinner</div></div>
         <div class="block note tbd"><div class="label">Notes</div><div class="content">Silver Dollar City? TBD</div></div>
       </div>
@@ -552,8 +559,8 @@
         <div class="row"><span class="name">✂️ Crafts and games</span></div>
         <div class="row"><span class="name">💃 Line dancing</span></div>
         <div class="panel-head rainy" style="margin-top:10px;">☔ Rainy day activities</div>
-        <div class="row"><span class="name">🎬 The Odyssey in IMAX</span></div>
-        <div class="row"><span class="name">🛍️ Tanger Outlets Branson</span></div>
+        <div class="row"><span class="name">🎬 <a href="https://www.odysseymovie.com/tickets/" target="_blank" rel="noopener">The Odyssey in IMAX</a></span></div>
+        <div class="row"><span class="name">🛍️ <a href="https://maps.app.goo.gl/xW6BX1xvUJ5SBDco8" target="_blank" rel="noopener">Tanger Outlets Branson</a></span></div>
       </div>
 
       <div class="panel">
@@ -562,9 +569,9 @@
         <div class="row"><span class="name">🌅 Sunset cruises</span></div>
         <div class="row"><span class="name">🤿 Cliff jumping / coving out</span></div>
         <div class="panel-head stores" style="margin-top:10px;">🏬 Nearby stores</div>
-        <div class="row"><span class="name">🛒 Costco</span><span class="val">Springfield, MO</span></div>
-        <div class="row"><span class="name">🛒 King's Food Saver</span><span class="val">Branson West</span></div>
-        <div class="row"><span class="name">🛒 Harter House</span><span class="val">Branson area</span></div>
+        <div class="row"><span class="name">🛒 <a href="https://maps.app.goo.gl/SyzQrT74Kr8v18LF6" target="_blank" rel="noopener">Costco</a></span><span class="val">Springfield, MO</span></div>
+        <div class="row"><span class="name">🛒 <a href="https://maps.app.goo.gl/HXadEGdEBMeoSAVz5" target="_blank" rel="noopener">King's Food Saver</a></span><span class="val">Branson West</span></div>
+        <div class="row"><span class="name">🛒 <a href="https://maps.app.goo.gl/1cC4B8d2XbCqsDJJ7" target="_blank" rel="noopener">Harter House</a></span><span class="val">Branson area</span></div>
       </div>
 
       <div class="panel condo-panel">
