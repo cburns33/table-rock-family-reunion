@@ -342,6 +342,21 @@
   .reserve-badge.pontoon{background:var(--gold); margin-left:4px;}
   .badge-row{display:flex; flex-wrap:wrap; align-items:center;}
 
+  .surf-badge{
+    display:inline-flex;
+    font-size:9.5px;
+    font-weight:700;
+    letter-spacing:0.02em;
+    border-radius:999px;
+    padding:2px 8px;
+    margin-top:5px;
+    margin-left:4px;
+    color:#fff;
+    width:fit-content;
+    background:linear-gradient(90deg,#1f7a8c,#155e6c);
+  }
+  .surf-badge:first-child{margin-left:0;}
+
   /* sticky day-nav pills, mobile/tablet only */
   .day-nav{
     display:none;
@@ -403,6 +418,32 @@
   .panel-head.boat{background:#2b6f8f;}
   .panel-head.stores{background:#7a6a4f;}
   .panel-head.condo{background:var(--navy);}
+  .panel-head.surf{background:linear-gradient(90deg,#1f7a8c,#155e6c);}
+
+  .surf-panel{grid-column:1 / -1;}
+  .surf-schedule{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+  }
+  @media (max-width:700px){ .surf-schedule{grid-template-columns:repeat(2,1fr);} }
+  .surf-day{
+    background:var(--blue-soft);
+    border-radius:var(--radius-inner);
+    padding:10px 12px;
+  }
+  .surf-day-label{
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:0.06em;
+    color:var(--navy);
+    text-transform:uppercase;
+    margin-bottom:4px;
+  }
+  .surf-slot{font-size:12.5px; line-height:1.5; color:var(--ink);}
+  .surf-slot .surf-group{font-weight:700; color:var(--navy-deep);}
+  .surf-caveat{font-size:11px; line-height:1.4; color:var(--ink-soft); font-style:italic; margin-top:4px;}
+  .surf-footer{font-size:12px; color:var(--ink-soft); font-style:italic; margin-top:10px; padding-left:2px; text-wrap:pretty;}
 
   .row{
     display:flex;
@@ -491,7 +532,7 @@
 
       <div class="day" id="day-sun" data-date="2026-07-19">
         <div class="day-head"><div class="dow">Sun</div><div class="date">Jul 19</div>
-          <div class="badge-row"><span class="today-badge">Today</span><span class="weather-badge"></span></div>
+          <div class="badge-row"><span class="surf-badge">🏄 Surf sched.</span><span class="today-badge">Today</span><span class="weather-badge"></span></div>
         </div>
         <div class="block"><div class="label">Morning</div><div class="content">Mass @ Our Lady of the Cove — 8am or 10am</div></div>
         <div class="block tbd"><div class="label">Afternoon</div><div class="content">World Cup Final ⚽ 2pm (location TBD)<br>Line dancing (location TBD)</div></div>
@@ -501,7 +542,7 @@
 
       <div class="day" id="day-mon" data-date="2026-07-20">
         <div class="day-head"><div class="dow">Mon</div><div class="date">Jul 20</div>
-          <div class="badge-row"><span class="reserve-badge conf">🟩 Conf. room</span><span class="today-badge">Today</span><span class="weather-badge"></span></div>
+          <div class="badge-row"><span class="reserve-badge conf">🟩 Conf. room</span><span class="surf-badge">🏄 Surf sched.</span><span class="today-badge">Today</span><span class="weather-badge"></span></div>
         </div>
         <div class="block"><div class="label">Morning</div><div class="content">Gentlemen's golf day ⛳</div></div>
         <div class="block"><div class="label">Afternoon</div><div class="content">Music / concert, 3–4pm</div></div>
@@ -511,7 +552,7 @@
 
       <div class="day" id="day-tue" data-date="2026-07-21">
         <div class="day-head"><div class="dow">Tue</div><div class="date">Jul 21</div>
-          <div class="badge-row"><span class="reserve-badge conf">🟩 Conf. room</span><span class="reserve-badge pontoon">🟨 Pontoon</span><span class="today-badge">Today</span><span class="weather-badge"></span></div>
+          <div class="badge-row"><span class="reserve-badge conf">🟩 Conf. room</span><span class="reserve-badge pontoon">🟨 Pontoon</span><span class="surf-badge">🏄 Surf sched.</span><span class="today-badge">Today</span><span class="weather-badge"></span></div>
         </div>
         <div class="block"><div class="label">Morning</div><div class="content">Ladies' spa day 💅 (all day)</div></div>
         <div class="block"><div class="label">Afternoon</div><div class="content">Music / concert, 3–4pm</div></div>
@@ -522,7 +563,7 @@
 
       <div class="day" id="day-wed" data-date="2026-07-22">
         <div class="day-head"><div class="dow">Wed</div><div class="date">Jul 22</div>
-          <div class="badge-row"><span class="reserve-badge conf">🟩 Conf. room</span><span class="reserve-badge pontoon">🟨 Pontoon</span><span class="today-badge">Today</span><span class="weather-badge"></span></div>
+          <div class="badge-row"><span class="reserve-badge conf">🟩 Conf. room</span><span class="reserve-badge pontoon">🟨 Pontoon</span><span class="surf-badge">🏄 Surf sched.</span><span class="today-badge">Today</span><span class="weather-badge"></span></div>
         </div>
         <div class="block"><div class="label">Morning</div><div class="content">Brunch 🥐</div></div>
         <div class="block"><div class="label">Afternoon</div><div class="content">Music / concert, 3–4pm</div></div>
@@ -544,6 +585,35 @@
     <div class="reserved-grid" style="margin-top:8px; margin-bottom:0;">
       <div class="reserved conf"><span class="arrow">▲</span>Conference Room Reserved<span class="arrow">▲</span></div>
       <div class="reserved pontoon"><span class="arrow">▲</span>Pontoon Reserved<span class="arrow">▲</span></div>
+    </div>
+
+    <div class="panel surf-panel">
+      <div class="panel-head surf">🏄 S.S. Sheworthy — Surf Boat Schedule</div>
+      <div class="surf-schedule">
+        <div class="surf-day">
+          <div class="surf-day-label">Sun</div>
+          <div class="surf-slot">12–3pm <span class="surf-group">Experienced surfers</span></div>
+          <div class="surf-caveat">Heavy weekend boat traffic — experienced only</div>
+        </div>
+        <div class="surf-day">
+          <div class="surf-day-label">Mon</div>
+          <div class="surf-slot">10–12pm <span class="surf-group">Girlz</span></div>
+          <div class="surf-slot">1:30–3:30pm <span class="surf-group">Couples</span></div>
+        </div>
+        <div class="surf-day">
+          <div class="surf-day-label">Tue</div>
+          <div class="surf-slot">10–12pm <span class="surf-group">Boyz</span></div>
+          <div class="surf-slot">1:30–3:30pm <span class="surf-group">Couples</span></div>
+          <div class="surf-caveat">Cove out after with pontoon crew (hopefully)</div>
+        </div>
+        <div class="surf-day">
+          <div class="surf-day-label">Wed</div>
+          <div class="surf-slot">10–12pm <span class="surf-group">Novices</span></div>
+          <div class="surf-slot">1:30–3:30pm <span class="surf-group">Experts</span></div>
+          <div class="surf-caveat">Cove out after with pontoon · first come, first served</div>
+        </div>
+      </div>
+      <div class="surf-footer">⚓ Captained by Admiral J.A. Grantham · holds 10 surfers comfortably (capt + first mate + 10 is max, 12 is crowded)</div>
     </div>
   </section>
 
